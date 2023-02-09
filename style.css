@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    height: 100%;
+}
+
+body{
+    background-color: #fff;
+    text-align: center;
+    min-height: 100%;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.container{ 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header,.footer{
+    background-color: #624133;
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 10px;
+}
+.main-content{
+    width: 100%;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+}
+
+#add-button{
+    background-color: #fff;
+    height: 50px;
+    width: 200px;
+    border:solid 5px #624133;
+    border-radius: 5px;
+    color: #624133;;
+    font-size: 1.2rem;
+    box-shadow: 0 0 10px;
+    margin-bottom: 40px;
+}
+
+.book-container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 40px;
+    padding: 40px;
+}
+
+.book{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: #624133;
+    height: 350px;
+    border: solid 10px #624133;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 1.2rem;
+}
+
+.book .button{
+    font-family: inherit;
+    background-color: #fff;
+    height: 40px;
+    min-width: 100px;
+    border:solid 5px #624133;
+    color: #624133;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px;
+    margin-bottom: 40px; 
+    padding: 5px;
+}
