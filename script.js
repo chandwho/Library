@@ -1,60 +1,102 @@
 const bookContainer = document.querySelector('.book-container');
 const addButton = document.querySelector('#add-button');
+const form = document.querySelector('form');
+const modal = document.querySelector('#modal-container');
+const closeModal = document.querySelector('#close-modal');
+
+const myBook = [];
 
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = read;
   this.info = () => `${title} by ${author}, ${pages} pages, ${read}`;
 }
 
-// const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 'not read yet');
+Book.prototype.read;
+// Input from form
+form.addEventListener('submit', addBookToLibrary);
 
-// console.log(book1.info());
+// Adding book object to array
+function addBookToLibrary(event) {
+  modal.style.display = 'none';
 
-const myBook = [];
+  const book = new Book();
+  book.title = document.getElementById('title').value;
+  book.author = document.getElementById('author').value;
+  book.pages = document.getElementById('pages').value;
 
-const book1 = new Book('Harry Potter 1', 'J.K Rowling', '351', 'Read');
-const book2 = new Book('Harry Potter 2', 'J.K Rowling', '352', 'Not Read');
-const book3 = new Book('Harry Potter 3', 'J.K Rowling', '353', 'Not Read');
+  if (document.getElementById('checkbox').checked) {
+    book.read = 'Read';
+  } else {
+    book.read = 'Not read yet';
+  }
 
-myBook.push(book1, book2, book3);
-
-function addBookToLibrary() {
-  title = prompt('Enter title', '');
-  author = prompt('Enter author', '');
-  pages = prompt('Enter pages', '');
-  read = prompt('Read the book?', '');
-  const book = new Book(title, author, pages, read);
+  form.reset();
+  event.preventDefault();
+  book.position = myBook.length;
   myBook.push(book);
+  displayBook();
 }
 
-// if (confirm('Want to add book?', '')) {
-//   addBookToLibrary();
-// }
-
+// Displays each book on screen
 function displayBook() {
+  const div = document.createElement('div');
+  const displayTitle = document.createElement('h2');
+  const displayAuthor = document.createElement('h3');
+  const displayPages = document.createElement('h3');
+  const displayRead = document.createElement('button');
+  const removeButton = document.createElement('button');
+
+  displayRead.addEventListener('click', toggleReadStatus);
+  removeButton.addEventListener('click', () => {
+    console.log(myBook);
+    removeBook();
+    div.remove();
+  });
+
   myBook.forEach((book) => {
-    const div = document.createElement('div');
-
-    const displayTitle = document.createElement('h2');
     displayTitle.innerText = book.title;
-
-    const displayAuthor = document.createElement('h3');
     displayAuthor.innerText = book.author;
-
-    const displayPages = document.createElement('h3');
-    displayPages.innerText = book.pages + ' pages';
-
-    const displayRead = document.createElement('button');
+    displayPages.innerText = `${book.pages} pages`;
     displayRead.innerText = book.read;
+    removeButton.innerText = 'Remove Book';
 
     bookContainer.append(div);
-    div.append(displayTitle, displayAuthor, displayPages, displayRead);
+    div.append(displayTitle, displayAuthor, displayPages, displayRead, removeButton);
     div.classList.add('book');
-    displayRead.classList.add('button')
+    displayRead.classList.add('button');
+    removeButton.classList.add('button');
   });
 }
 
-displayBook();
+// Toggle read status of book
+function toggleReadStatus(e) {
+  if (this.read === 'Read') {
+    this.read = 'Not read yet';
+  }
+  else { this.read = 'Read'; }
+  e.target.innerText = this.read;
+}
+
+function removeBook() {
+  myBook.splice(this.position, 1);
+  console.log(myBook);
+}
+// Add book button
+
+addButton.addEventListener('click', () => {
+  modal.style.display = 'block';
+});
+
+// Closing form
+
+closeModal.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.style.display = 'none';
+  }
+});
