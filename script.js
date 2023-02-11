@@ -2,7 +2,7 @@ const bookContainer = document.querySelector('.book-container');
 const addButton = document.querySelector('#add-button');
 const form = document.querySelector('form');
 const modal = document.querySelector('#modal-container');
-const closeModal = document.querySelector('#close-modal');
+const closeModal = document.querySelector('#close-modal-button');
 
 const myBook = [];
 
@@ -27,7 +27,7 @@ function addBookToLibrary(event) {
   book.pages = document.getElementById('pages').value;
 
   if (document.getElementById('checkbox').checked) {
-    book.read = 'Read';
+    book.read = 'Completed';
   } else {
     book.read = 'Not read yet';
   }
@@ -57,8 +57,8 @@ function displayBook() {
 
   myBook.forEach((book) => {
     displayTitle.innerText = book.title;
-    displayAuthor.innerText = book.author;
-    displayPages.innerText = `${book.pages} pages`;
+    displayAuthor.innerText = `by ${book.author}`;
+    displayPages.innerText = `Pages: ${book.pages}`;
     displayRead.innerText = book.read;
     removeButton.innerText = 'Remove Book';
 
@@ -66,16 +66,17 @@ function displayBook() {
     div.append(displayTitle, displayAuthor, displayPages, displayRead, removeButton);
     div.classList.add('book');
     displayRead.classList.add('button');
-    removeButton.classList.add('button');
+    removeButton.classList.add('button', 'remove-button');
   });
 }
 
 // Toggle read status of book
 function toggleReadStatus(e) {
-  if (this.read === 'Read') {
+  if (this.read === 'Completed') {
     this.read = 'Not read yet';
+  } else {
+    this.read = 'Completed!';
   }
-  else { this.read = 'Read'; }
   e.target.innerText = this.read;
 }
 
