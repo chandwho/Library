@@ -9,7 +9,7 @@ html{
 }
 
 body{
-    background-color: #f2bc94;
+    background-color: #fbdac0;
     text-align: center;
     min-height: 100%;
     font-family: 'Courier New', Courier, monospace;
@@ -160,6 +160,11 @@ form #submit-button{
     height: 50px;
     width: 250px; 
     padding: 5px;
+}
+
+.read-button:hover{
+    background-color: #30110d;
+    color: #fff;
 }
 
 .remove-button:hover{
